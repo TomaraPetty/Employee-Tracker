@@ -1,0 +1,25 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "tracks and stores employee data in a mysql database.",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomaraPetty/Employee-Tracker.git"
+  },
+  "author": "Tomara Petty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TomaraPetty/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/TomaraPetty/Employee-Tracker#readme"
+}
