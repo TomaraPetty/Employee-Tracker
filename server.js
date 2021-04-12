@@ -1,56 +1,90 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const { printTable } = require("console-table-printer");
+const figlet = require('figlet');
 
-// create the connection information for the sql database
+figlet('Employee Tracker', function (err, data) {
+  if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+  }
+  console.log(data)
+});
+
+// Create connection to sql database.
 const connection = mysql.createConnection({
   host: "localhost",
-
-  // Your port; if not 3306
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
-  password: "",
+  password: "MyMySQL1029",
   database: "employee_db"
 });
 
-// connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection is made to prompt the user
   start();
 });
 
-// function which prompts the user for what action they should take
+// Prompt user for what they would like to do.
 function start() {
   inquirer
     .prompt({
       name: "selection",
       type: "list",
       message: "What would you like to do?",
-      choices: ["Add", "View", "Update"]
+      choices: [
+        "Add employee",
+        "Add department",
+        "View role", 
+        "View employee",
+        "View department",
+        "View role", 
+        "Update employee role",
+        "Exit"
+      ]
     })
-    .then(function(answer) {
-      // based on their answer, either call the bid or the post functions
-      if (answer.selection === "Add") {
-        add();
-      }
-      if (answer.selection === "View") {
-        view();
-      }
-      else if(answer.postOrBid === "Update") {
-        update();
-      } else{
-        connection.end();
+    .then((answer) => {
+      switch (answer.selection) {
+        case "Add employee":
+          addEmployee();
+          break;
+
+        case "Add department":
+          addDepartment();
+          break;
+
+        case "Add role":
+          addRole();
+          break;
+
+        case "View employees":
+          viewEmployee();
+          break;
+
+        case "View department":
+          viewDepartment();
+          break;
+
+        case "View role":
+          viewRole();
+          break;
+
+        case "Update employee role":
+          update();
+          break;
+
+        case "Exit":
+          connection.end();
+          break;
       }
     });
 }
 
-// function to handle posting new items up for auction
-function add() {
-  // prompt for info about the item being put up for auction
+// Add employee
+function addEmployee() {
+  connection.query("SELECT employee.id", function(err, results) {
+    if (err) throw err;
   inquirer
     .prompt([
       {

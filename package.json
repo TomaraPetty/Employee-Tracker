@@ -4,8 +4,10 @@
   "description": "tracks and stores employee data in a mysql database.",
   "main": "index.js",
   "dependencies": {
-    "mysql": "^2.18.1",
-    "inquirer": "^8.0.0"
+    "console-table-printer": "^2.8.2",
+    "figlet": "^1.5.0",
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {},
   "scripts": {
