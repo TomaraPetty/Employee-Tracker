@@ -14,9 +14,6 @@ VALUE ("Jamie", "Travis", 6, 5);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUE ("Jessica", "Stevens", 7, null);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Sarah", "Kennedy", 8, 7);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Penelope", "Tsmilia", 9, null);
 
 -- Roles
 INSERT INTO role (title, salary, department_id)
@@ -29,7 +26,6 @@ INSERT INTO role (title, salary, department_id)
 VALUE ("Marketing Director", 72000, 4);
 INSERT INTO role (title, salary, department_id)
 VALUE ("Head of Radio", 60000, 5);
-INSERT INTO role (title, salary, department_id)
 
 -- Departments 
 INSERT INTO department (name)
@@ -42,3 +38,7 @@ INSERT INTO department (name)
 VALUE ("Assistant");
 INSERT INTO department (name)
 VALUE ("Marketing");
+
+SELECT * FROM employee;
+SELECT * FROM role;
+SELECT * FROM department;

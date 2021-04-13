@@ -83,8 +83,6 @@ function start() {
 
 // Add employee
 function addEmployee() {
-  connection.query("SELECT employee.id", function(err, results) {
-    if (err) throw err;
   inquirer
     .prompt([
       {
@@ -103,14 +101,14 @@ function addEmployee() {
         message: "What is the employee's last name?"
       },
       {
-        name: "role",
+        name: "roleID",
         type: "input",
-        message: "What is the employee's role?"
+        message: "What is the employee's role ID?"
       },
       {
-        name: "salary",
+        name: "managerID",
         type: "input",
-        message: "What is the employee's salary?"
+        message: "What is the employee's manager ID?"
       },
       {
         name: "department",
@@ -119,80 +117,39 @@ function addEmployee() {
       }
     ])
     .then(function(answer) {
-      // when finished prompting, insert a new item into the db with that info
-      connection.query(
-        "INSERT INTO auctions SET ?",
-        {
-          firstName_name: answer.firstName,
-          lastName_name: answer.lastName,
-          role_name: answer.role,
-          salary_name: answer.salary,
-          department_name: answer.department
-        },
-        function(err) {
+      const query = "INSERT INTO employee SET ?";
+      connection.query(query, { id: answer.id, first_name: answer.firstName, last_name: answer.lastName, role_id: answer.roleID, manager_id: answer.managerID },
+        function(err, res) {
           if (err) throw err;
           console.log("Your employee was created successfully!");
-          // re-prompt the user for if they want to bid or post
           start();
         }
       );
     });
-}
 
-function view() {
-  // query the database for all items being auctioned
+  function viewEmployees() {
   connection.query("SELECT * FROM employee", function(err, results) {
     if (err) throw err;
-    // once you have the items, prompt the user for which they'd like to bid on
-    inquirer
-      .prompt([
-        {
-          name: "choice",
-          type: "rawlist",
-          choices: function() {
-            const choiceArray = [];
-            for (var i = 0; i < results.length; i++) {
-              choiceArray.push(results[i].firstName_name);
-            }
-            return choiceArray;
-          },
-          message: "What employee would you like to view?"
-        }
-      ])
-      .then(function(answer) {
-        // get the information of the chosen item
-        const chosenItem;
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].firstName_name === answer.choice) {
-            chosenItem = results[i];
-          }
-        }
-
-        // determine if bid was high enough
-        if (chosenItem.firstName_name) {
-          // bid was high enough, so update db, let the user know, and start over
-          connection.query(
-            "UPDATE auctions SET ? WHERE ?",
-            [
-              {
-                role: answer.role
-              },
-              {
-                id: chosenItem.id
-              }
-            ],
-            function(error) {
-              if (error) throw err;
-              console.log("Successfully updated employee information!");
-              start();
-            }
-          );
-        }
-        else {
-          // bid wasn't high enough, so apologize and start over
-          console.log("Could not update, try again...");
-          start();
-        }
-      });
+    console.table(results);
+    start();
   });
+  }
+
+  function viewRoles() {
+    const query = "SELECT * FROM role"
+    connection.query(query, function(err, results) {
+      if (err) throw err;
+      console.table(results);
+      start();
+    });
+    }
+   
+    function viewDeparment() {
+      const query = "SELECT * FROM department"
+      connection.query(query, function(err, results) {
+        if (err) throw err;
+        console.table(results);
+        start();
+      });
+      }
 }
