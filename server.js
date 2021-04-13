@@ -127,6 +127,72 @@ function addEmployee() {
       );
     });
 
+    function addDepartment() {
+      inquirer.prompt(
+          {
+              type: 'input',
+              message: 'Department name:',
+              name: 'name'
+          }
+      ).then(function (answer) {
+          const query = 'INSERT INTO department SET ?';
+          connection.query(query, { name: answer.name }, (err, res) => {
+              if (err) throw err;
+              console.log(answer.name + " has been added");
+              start();  
+          });
+      });
+  }
+
+  function addRole() {
+    connection.query("SELECT * FROM department", (err, department) => {
+        let departments = department.map(department => department.name);
+
+
+        inquirer.prompt([
+            {
+                type: 'input',
+                message: 'Enter role:',
+                name: 'title'
+            },
+            {
+                type: 'input',
+                message: "Enter salary:",
+                name: 'salary'
+
+            },
+            {
+                type: 'list',
+                message: 'Choose the following department',
+                choices: departments,
+                name: 'department'
+            }
+        ]).then(function (answer) {
+            const departmentObject = department.find(department => department.name === answer.department);
+
+            const query = 'INSERT INTO role SET ?';
+            connection.query(query,
+                {
+                    title: answer.title,
+                    salary: answer.salary,
+                    department_id: departmentObject.id
+
+                },
+
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(answer.title + " has been added");
+                    start();
+                }
+
+            );
+
+        });
+    })
+
+}
+  
+
   function viewEmployees() {
   connection.query("SELECT * FROM employee", function(err, results) {
     if (err) throw err;
