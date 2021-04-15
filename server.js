@@ -132,25 +132,25 @@ function addEmployee() {
 
 function addDepartment() {
   inquirer
-    .prompt(
+    .prompt([
       {
         name: 'id',
         type: 'input',
         message: "Enter department's id number: ",
       },
       {
-        name: 'name',
+        name: 'depName',
         type: 'input',
         message: 'Name of department:',
       }
-    )
+    ])
     .then(function (answer) {
       const query = 'INSERT INTO department SET ?';
       connection.query(
         query,
         {
           id: answer.id,
-          name: answer.name,
+          name: answer.depName,
         },
         (err, res) => {
           if (err) throw err;
