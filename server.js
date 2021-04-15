@@ -133,75 +133,84 @@ function addEmployee() {
 function addDepartment() {
   inquirer
     .prompt(
-    {
-      name: 'id',
-      type: 'input',
-      message: "Enter department's id number: ",
-    },
-    {
-      name: 'name',
-      type: 'input',
-      message: 'Name of department:',
-    },)
+      {
+        name: 'id',
+        type: 'input',
+        message: "Enter department's id number: ",
+      },
+      {
+        name: 'name',
+        type: 'input',
+        message: 'Name of department:',
+      }
+    )
     .then(function (answer) {
       const query = 'INSERT INTO department SET ?';
       connection.query(
-        query, 
+        query,
         {
           id: answer.id,
           name: answer.name,
-        }, 
-          (err, res) => {
-        if (err) throw err;
-        start();
-      });
+        },
+        (err, res) => {
+          if (err) throw err;
+          start();
+        }
+      );
     });
 }
 
 function addRole() {
   const query = 'SELECT * FROM department';
-  connection.query(query, answer, (err, department) => {
-    let departments = department.map(department => department.name);
-    inquirer
-      .prompt([
-        {
-          type: 'input',
-          message: 'Enter role:',
-          name: 'title',
-        },
-        {
-          type: 'input',
-          message: 'Enter salary:',
-          name: 'salary',
-        },
-        {
-          type: 'list',
-          message: 'Choose department:',
-          choices: departments,
-          name: 'department',
-        },
-      ])
-      .then(function (answer) {
-        const departmentObject = department.find(
+      connection.query(query, answer, (err, res) => {
+        let departments = res.map(department => department.name);
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'Enter id:',
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: 'Enter title:',
+        name: 'title',
+      },
+      {
+        type: 'input',
+        message: 'Enter salary:',
+        name: 'salary',
+      },
+      {
+        type: 'list',
+        message: 'Choose department:',
+        choices: departments,
+        name: 'department',
+      },
+    ])
+    .then(function (answer) {
+      
+        const departmentObject = res.find(
           department => department.name === answer.department
         );
 
-        // const query = 'INSERT INTO role SET ?';
-        // connection.query(
-        //   query,
-        //   answer,
-        //   {
-        //       title: answer.title,
-        //       salary: answer.salary,
-        //       department_id: departmentObject.id
+        const query = 'INSERT INTO role SET ?';
+        connection.query(
+          query,
+          {
+            id: answer.id,  
+            title: answer.title,
+            salary: answer.salary,
+            department_id: departmentObject.id
+          },
 
-        //   },
-
-        //   (err, res) => {
-        //     if (err) throw err;
-        start();
-      });
-  });
+          (err, res) => {
+            if (err) throw err;
+            start();
+      }
+      );
+    });
+  })
 }
 
 function viewEmployee() {
