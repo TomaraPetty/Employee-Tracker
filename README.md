@@ -72,11 +72,11 @@ https://youtu.be/zyPnBDruayo
 #### If you have any questions or want to make a contribution please reach out to me here:
 
 **GitHub:**  
-* @tomarapetty
+@tomarapetty
 
 **Email:** 
-* tomararuth@gmail.com 
+tomararuth@gmail.com 
 
 **LinkedIn:** 
-* Tomara: https://www.linkedin.com/in/tomara-petty/ 
+Tomara: https://www.linkedin.com/in/tomara-petty/ 
 
