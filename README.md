@@ -1,14 +1,8 @@
 # Employee-Tracker
 
-As a business owner
-I want to be able to view and manage the departments, roles, and employees in my company
-So that I can organize and plan my business
-
-# Laura-Cullen
-  
 ![GitHub](https://img.shields.io/badge/license-MIT-green)
 
-<a href="https://laura-cullen.herokuapp.com/">Click here to see it in action.</a>
+<a href="https://youtu.be/zyPnBDruayo">Click here to see it in action.</a>
 
 ## Table of Contents
 * [Description](#description)
@@ -21,9 +15,9 @@ So that I can organize and plan my business
 
 ## Description 
 *Overview of this project:* <br> 
-`As a business owner I want to be able to view and manage the departments, roles, and employees in my company so that I can organize and plan my business`
-* The CMS includes one SQL database with three tables.
-`Employee | Role | Department`
+As a business owner I want to be able to view and manage the departments, roles, and employees in my company so that I can organize and plan my business. <br>
+* The CMS includes one SQL database with three tables. <br>
+`Employee | Role | Department` <br>
 * Inquirer is used to prompt the user for information about the employees, roles and departments.
 * The user can:
     1. Add employees
@@ -52,8 +46,15 @@ node server.js
 * Type `node server.js` into the terminal to run the application in your terminal.  
 * Answer the questions that you are prompted to answer in order to add or view data.
 
-<img src="./client/public/images/LaurasPage.gif">
+#### Employee, department and role "Add" functionality:
+<img src="./assets/ET-1.gif">
 
+#### Employee, department and role "View" functionality:
+<img src="./assets/ET-2.gif">
+
+#### Click here to see the full video. 
+<br>
+https://youtu.be/zyPnBDruayo
 
 ## License 
 * Built under the MIT licence.
