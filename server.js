@@ -161,9 +161,6 @@ function addDepartment() {
 }
 
 function addRole() {
-  const query = 'SELECT * FROM department';
-      connection.query(query, answer, (err, res) => {
-        let departments = res.map(department => department.name);
   inquirer
     .prompt([
       {
@@ -182,18 +179,13 @@ function addRole() {
         name: 'salary',
       },
       {
-        type: 'list',
-        message: 'Choose department:',
-        choices: departments,
+        type: 'input',
+        message: 'What is the department id number?',
         name: 'department',
+      
       },
     ])
     .then(function (answer) {
-      
-        const departmentObject = res.find(
-          department => department.name === answer.department
-        );
-
         const query = 'INSERT INTO role SET ?';
         connection.query(
           query,
@@ -201,7 +193,7 @@ function addRole() {
             id: answer.id,  
             title: answer.title,
             salary: answer.salary,
-            department_id: departmentObject.id
+            department_id: answer.department
           },
 
           (err, res) => {
@@ -210,7 +202,7 @@ function addRole() {
       }
       );
     });
-  })
+
 }
 
 function viewEmployee() {
@@ -222,15 +214,6 @@ function viewEmployee() {
       startApp();
   });
 }
-
-// function viewEmployee() {
-//   const query = 'SELECT * FROM employee';
-//   connection.query(query, (err, res) => {
-//     if (err) throw err;
-//     console.table(res);
-//     start();
-//   });
-// }
 
 function viewRole() {
   const query = 'SELECT * FROM role';
@@ -323,7 +306,7 @@ function update() {
                       if (err) throw err;
                   });
 
-              console.log(answer.employee + "'s role has been updated.");
+              
               start();
 
 
