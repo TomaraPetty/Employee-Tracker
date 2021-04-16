@@ -12,7 +12,7 @@ figlet('Employee Tracker', function (err, data) {
   console.log(data);
 });
 
-// Create connection to sql database.
+// Create connection
 const connection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
@@ -81,7 +81,6 @@ function start() {
     });
 }
 
-// Add employee
 function addEmployee() {
   inquirer
     .prompt([
