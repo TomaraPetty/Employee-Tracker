@@ -52,7 +52,7 @@ node server.js
 #### Employee, department and role "View" functionality:
 <img src="./assets/ET-2.gif">
 
-#### Click here to see the full video. 
+#### Click here to see the full video: 
 https://youtu.be/zyPnBDruayo
 
 ## License 
