@@ -53,7 +53,6 @@ node server.js
 <img src="./assets/ET-2.gif">
 
 #### Click here to see the full video. 
-<br>
 https://youtu.be/zyPnBDruayo
 
 ## License 
@@ -69,18 +68,14 @@ https://youtu.be/zyPnBDruayo
 <p float="left">
 <img src="https://avatars0.githubusercontent.com/u/65513543?s=460&u=20bf726727263d5c2cb42b357ae261aff2a38e6e&v=4" alt="GitHub profile image" width="200">
 </p>
-<br>
 
 #### If you have any questions or want to make a contribution please reach out to me here:
-<br>
 
 **GitHub:**  
 * @tomarapetty
- <br>
 
 **Email:** 
 * tomararuth@gmail.com 
-<br>
 
 **LinkedIn:** 
 * Tomara: https://www.linkedin.com/in/tomara-petty/ 
