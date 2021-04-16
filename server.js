@@ -233,87 +233,32 @@ function viewDepartment() {
   });
 }
 
-// function update() {
-//   inquirer
-//     .prompt([
-//       {
-//         name: 'update',
-//         type: 'input',
-//         message: 'Enter employee ID you would like to update',
-//       },
-//       {
-//         name: 'newRole',
-//         type: 'input',
-//         message: "Enter employee's new role",
-//       },
-//     ])
-//     .then(function (answer) {
-//       const query = 'UPDATE role SET title = ? WHERE = ?';
-//       connection.query(
-//         query,
-//         [req.body.quote, req.params.id],
-//         function (err, res) {
-//           if (err) throw err;
-//           console.table(res);
-//         }
-//       );
-//       printTable(res);
-//       start();
-//     });
-// }
-
 function update() {
-  connection.query(`SELECT employee.id employeeID, role.id roleID, 
-  employee.first_name, employee.last_name, role.title
-  FROM employee
-  LEFT JOIN role on role.id = employee.role_id`,
-      (err, employeeDB) => {
-          let updateEmployee = employeeDB.map(employee => employee.first_name + " " + employee.last_name);
-          let updateEmployeeRole = employeeDB.map(role => role.title);
-
-
-          inquirer.prompt([
-              {
-                  type: 'list',
-                  message: 'Select an employee to update their role',
-                  choices: updateEmployee,
-                  name: 'employee'
-              },
-              {
-                  type: 'list',
-                  message: 'Choose new role',
-                  choices: updateEmployeeRole,
-                  name: 'role'
-              }
-
-          ]).then(function (answer) {
-              const employeeObj = employeeDB.find(employee => employee.first_name + " " + employee.last_name === answer.employee);
-              const employeeRoleObject = employeeDB.find(role => role.title === answer.role);
-              
-              const query = 'UPDATE employee SET ? WHERE ?';
-
-              connection.query(query,
-                  [{
-
-                      role_id: employeeRoleObject.roleID
-
-                  },
-                  {
-                      id: employeeObj.employeeID
-                  }],
-
-                  (err, res) => {
-                      if (err) throw err;
-                  });
-
-              
-              start();
-
-
-          })
-
-
-
-      })
+  inquirer
+    .prompt([
+      {
+        name: 'id',
+        type: 'input',
+        message: 'Enter employee ID you would like to update',
+      },
+      {
+        name: 'new_role',
+        type: 'input',
+        message: "Enter employee's new role"
+      }
+    ])
+    .then(function (answer) {
+      const query = 'UPDATE role SET ? WHERE ?';
+      connection.query(
+        query,
+        [{ title: answer.new_role },{id: answer.id }],
+        function (err, res) {
+          if (err) throw err;
+        }
+      )
+      start();
+    }
+  )
 }
+
 
