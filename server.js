@@ -58,7 +58,7 @@ function start() {
           addRole();
           break;
 
-        case 'View employees':
+        case 'View employee':
           viewEmployee();
           break;
 
@@ -206,12 +206,12 @@ function addRole() {
 }
 
 function viewEmployee() {
-  const query = `SELECT  employee.id,  employee.first_name, employee.last_name, role_id, manager_id`;
+  const query = 'SELECT * FROM employee';
   connection.query(query, (err, res) => {
       if (err) throw err;
       
       printTable(res);
-      startApp();
+      start();
   });
 }
 
